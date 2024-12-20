@@ -1,69 +1,58 @@
 /* global Mesibo */
 
-const inputUser = document.getElementById('input-user');
-const inputAppId = document.getElementById('input-appId');
-const inputDestination = document.getElementById('input-destination');
-const form = document.getElementById('form');
-
+// Inicializa a API do Mesibo
 var api = new Mesibo();
 
-let user_token = '';
-let appid = '';
-let destination = '';
+// Variáveis globais para token, ID do aplicativo e destino
+var user_token = '';
+var destination = '';
+var appid = 'com.exemploteste';
 
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  // Obtém o token do usuário
-  const token = await getUserToken(inputUser.value, inputAppId.value);
-
-  if (token) {
-    user_token = token;
-    appid = inputAppId.value;
-    // Inicializa a Mesibo
-    initializeMesibo(user_token, appid);
-  }
-});
+var btnUser1 = document.getElementById('user-1');
+var btnUser2 = document.getElementById('user-2');
 
 
-inputDestination.addEventListener('change', (e) => {
-  destination = e.target.value;
-});
+btnUser1.addEventListener('click', async () => {
+  // Token de acesso do usuário 1
+  user_token = '7707585b877b03abf1bd081cd4785c686898e93dc8215a6425e334bbd32wa16b757aecd';
 
+  // Destino da chamada do usuário 1
+  destination = 'usuario2';
 
-// obter o token 
-async function getUserToken(user, appid) {
-  const response = await fetch('/mesibo/generate-token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ address: user, appId: appid }),
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    return data.token;
-  } else {
-    console.error('Erro ao buscar o token do usuário');
-    return null;
-  }
-}
-
-// inicializar a API do Mesibo
-async function initializeMesibo(userToken, appId) {
-  // config da API do Mesibo
-
-  api.setAppName(appId);
-  const listener = new MesiboListener(api);
+  // Configurações do Mesibo API
+  api.setAppName(appid);
+  var listener = new MesiboListener(api);
   api.setListener(listener);
-  api.setAccessToken(userToken);
+  api.setAccessToken(user_token);
   api.start();
 
-  // acessa a câmera e o microfone
   await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-}
+
+});
+
+btnUser2.addEventListener('click', async () => {
+  // Token de acesso do usuário 2
+  user_token = 'fbfd58e7779dd0c9d7e67c7544d6aaacbfa1a59695c1e0ef018e994bbd33ma1c63e70386';
+
+  // Destino da chamada do usuário 2
+  destination = 'usuario1';
+
+  // Configurações do Mesibo API
+  api.setAppName(appid);
+  var listener = new MesiboListener(api);
+  api.setListener(listener);
+  api.setAccessToken(user_token);
+  api.start();
 
 
+  // pedir permissões para acessar o video e o audio
+  await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+
+
+});
+
+// Função construtora para o listener do Mesibo
 function MesiboListener(o) {
   this.api = o;
 }
@@ -73,7 +62,10 @@ MesiboListener.prototype.Mesibo_onConnectionStatus = function (status) {
   console.log("Mesibo_onConnectionStatus: " + status);
 
   var s = document.getElementById("cstatus");
-  if (!s) return;
+  if (!s) {
+    return;
+  }
+
 
   if (MESIBO_STATUS_ONLINE === status) {
     s.classList.replace("btn-danger", "btn-success");
@@ -148,25 +140,29 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callid, status) {
 };
 
 
-// Funções auxiliares para controlar o vídeo e áudio
 
+// Função para iniciar uma chamada de vídeo
 function video_call() {
   api.setupVideoCall("localVideo", "remoteVideo", true);
   api.call(destination);
 }
 
+// Alterna o estado de mudo do vídeo
 function video_mute_toggle() {
   api.toggleVideoMute();
 }
 
+// Alterna o estado de mudo do áudio
 function audio_mute_toggle() {
   api.toggleAudioMute();
 }
 
+// Encerra a chamada
 function hangup() {
   api.hangup();
 }
 
+// Atende uma chamada
 function answer() {
   $('#answerModal').modal("hide");
   api.answer(true);
