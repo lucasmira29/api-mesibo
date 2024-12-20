@@ -1,55 +1,69 @@
 /* global Mesibo */
 
+const inputUser = document.getElementById('input-user');
+const inputAppId = document.getElementById('input-appId');
+const inputDestination = document.getElementById('input-destination');
+const form = document.getElementById('form');
 
-var btnUser1 = document.getElementById('user-1');
-var btnUser2 = document.getElementById('user-2');
+var api = new Mesibo();
 
-// Variáveis globais para token, ID do aplicativo e destino
-var user_token = '';
-var destination = '';
-var appid = 'com.exemploteste';
+let user_token = '';
+let appid = '';
+let destination = '';
 
 
-btnUser1.addEventListener('click', async () => {
-  // Token de acesso do usuário 1
-  user_token = '31dfd06912f942543e797678ddd2b459d15496dedf10a4615e554bbd06paf9b1d95ea5';
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-  // Destino da chamada do usuário 1
-  destination = 'usuario2@email.com';
+  // Obtém o token do usuário
+  const token = await getUserToken(inputUser.value, inputAppId.value);
 
-  // Configurações do Mesibo API
-  api.setAppName(appid);
-  var listener = new MesiboListener(api);
-  api.setListener(listener);
-  api.setAccessToken(user_token);
-  api.start();
-
-  await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-
+  if (token) {
+    user_token = token;
+    appid = inputAppId.value;
+    // Inicializa a Mesibo
+    initializeMesibo(user_token, appid);
+  }
 });
 
-btnUser2.addEventListener('click', async () => {
-  // Token de acesso do usuário 2
-  user_token = '7f33bf862cf040907967f35e66fef490975c549126eacedd4bbd28qa55eab39b13';
 
-  // Destino da chamada do usuário 2
-  destination = 'usuario1@email.com';
-
-  // Configurações do Mesibo API
-  api.setAppName(appid);
-  var listener = new MesiboListener(api);
-  api.setListener(listener);
-  api.setAccessToken(user_token);
-  api.start();
-
-
-  // 
-  await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-
-
+inputDestination.addEventListener('change', (e) => {
+  destination = e.target.value;
 });
 
-// Função construtora para o listener do Mesibo
+
+// obter o token 
+async function getUserToken(user, appid) {
+  const response = await fetch('/mesibo/generate-token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ address: user, appId: appid }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    return data.token;
+  } else {
+    console.error('Erro ao buscar o token do usuário');
+    return null;
+  }
+}
+
+// inicializar a API do Mesibo
+async function initializeMesibo(userToken, appId) {
+  // config da API do Mesibo
+
+  api.setAppName(appId);
+  const listener = new MesiboListener(api);
+  api.setListener(listener);
+  api.setAccessToken(userToken);
+  api.start();
+
+  // acessa a câmera e o microfone
+  await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+}
+
+
 function MesiboListener(o) {
   this.api = o;
 }
@@ -59,10 +73,7 @@ MesiboListener.prototype.Mesibo_onConnectionStatus = function (status) {
   console.log("Mesibo_onConnectionStatus: " + status);
 
   var s = document.getElementById("cstatus");
-  if (!s) {
-    return;
-  }
-
+  if (!s) return;
 
   if (MESIBO_STATUS_ONLINE === status) {
     s.classList.replace("btn-danger", "btn-success");
@@ -136,31 +147,26 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callid, status) {
   if (a) a.innerText = "Status da chamada: " + s;
 };
 
-// Inicializa a API do Mesibo
-var api = new Mesibo();
 
-// Função para iniciar uma chamada de vídeo
+// Funções auxiliares para controlar o vídeo e áudio
+
 function video_call() {
   api.setupVideoCall("localVideo", "remoteVideo", true);
   api.call(destination);
 }
 
-// Alterna o estado de mudo do vídeo
 function video_mute_toggle() {
   api.toggleVideoMute();
 }
 
-// Alterna o estado de mudo do áudio
 function audio_mute_toggle() {
   api.toggleAudioMute();
 }
 
-// Encerra a chamada
 function hangup() {
   api.hangup();
 }
 
-// Atende uma chamada
 function answer() {
   $('#answerModal').modal("hide");
   api.answer(true);
