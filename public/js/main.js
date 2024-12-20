@@ -4,6 +4,11 @@
 var btnUser1 = document.getElementById('user-1');
 var btnUser2 = document.getElementById('user-2');
 
+// Variáveis globais para token, ID do aplicativo e destino
+var user_token = '';
+var destination = '';
+var appid = 'com.exemploteste';
+
 
 btnUser1.addEventListener('click', async () => {
   // Token de acesso do usuário 1
@@ -43,12 +48,6 @@ btnUser2.addEventListener('click', async () => {
 
 
 });
-
-
-// Variáveis globais para token, ID do aplicativo e destino
-var user_token = '';
-var destination = '';
-var appid = 'com.exemploteste';
 
 // Função construtora para o listener do Mesibo
 function MesiboListener(o) {

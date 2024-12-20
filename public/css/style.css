@@ -1,31 +1,56 @@
 .container-video {
   position: relative;
-  justify-content: center;
-  padding: 50px 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 50px 0;
   background-color: #000000;
 }
 
 .div-remoteVideo {
-  border: 1px solid black;
+  position: relative;
   height: 700px;
-  width: 700px;
+  width: 100%;
   background-color: white;
+  overflow: hidden;
 }
 
 .div-localVideo {
   position: absolute;
-  border: 1px solid black;
-  top: 75%;
-  right: 18.5%;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
   height: 150px;
-  width: 220px;
-  background-color: white;
+  border: 2px solid black;
+  overflow: hidden;
+  z-index: 10;
 }
 
-#remoteVideo,
-#localVideo {
+#remoteVideo {
+  position: absolute;
   width: 100%;
   height: 100%;
-  padding: 0;
+  object-fit: cover;
+}
+
+#localVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+@media (max-width: 768px) {
+  .div-remoteVideo {
+    height: 500px;
+  }
+
+  .div-localVideo {
+    width: 150px;
+    height: 120px;
+    bottom: 10px;
+    right: 10px;
+  }
 }
