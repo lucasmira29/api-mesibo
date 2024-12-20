@@ -10,7 +10,7 @@ btnUser1.addEventListener('click', async () => {
   user_token = '31dfd06912f942543e797678ddd2b459d15496dedf10a4615e554bbd06paf9b1d95ea5';
 
   // Destino da chamada do usuário 1
-  // destination = 'usuario2@email.com';
+  destination = 'usuario2@email.com';
 
   // Configurações do Mesibo API
   api.setAppName(appid);
@@ -47,7 +47,7 @@ btnUser2.addEventListener('click', async () => {
 
 // Variáveis globais para token, ID do aplicativo e destino
 var user_token = '';
-var destination = '5547997851233';
+var destination = '';
 var appid = 'com.exemploteste';
 
 // Função construtora para o listener do Mesibo
