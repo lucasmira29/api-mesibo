@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
-  <title>mesibo - Messaging, Voice and Video Call API Demo</title>
+  <title>mesibo teste api</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./css/style.css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
+  <!-- mesibo api -->
   <script src="https://cdn.mesibo.com/api/mesibo.js"></script>
-  <!--SCRIPTINCLUDEEND-->
 
   <script src="./js/main.js" defer></script>
-
 </head>
 
 <body>
-  <div class="container" style="padding: 10px;">
+  <div class="container">
     <div class="border-bottom my-3">
-      <h2><span style="color: #00868b;">mesibo</span> - Messaging, Voice and Video Call API Demo</h2>
+      <h2><span style="color: #00868b;">mesibo</span> - Chamadas de Vídeo API Demo</h2>
     </div>
 
     <div class="py-4">
@@ -31,57 +31,49 @@
       <button class="btn btn-danger" id="user-2">Logar como usuário 2</button>
     </div>
 
-
-
-    <h3>Connection Status</h3>
-    <button type="button" class="btn btn-danger" id="cstatus">You are offline</button>
-
+    <h3>Status da Conexão</h3>
+    <button type="button" class="btn btn-danger" id="cstatus">Você está offline</button>
 
     <div style="padding-top: 30px;">
-      <button type="button" class="btn btn-primary" onclick="video_call()">Call</button>
-      <button type="button" class="btn btn-danger" onclick="hangup()">Hangup</button>
-      <button type="button" class="btn btn-info" onclick="video_mute_toggle()">Toggle Video Mute</button>
-      <button type="button" class="btn btn-warning" onclick="audio_mute_toggle()">Toggle Audio Mute</button>
-      <button type="button" class="btn btn-info" id="vcstatus" style="float:right;">Call Status: </button>
+      <button type="button" class="btn btn-primary" onclick="video_call()">Chamar</button>
+      <button type="button" class="btn btn-danger" onclick="hangup()">Desligar</button>
+      <button type="button" class="btn btn-info" onclick="video_mute_toggle()">Alternar Mudo do Vídeo</button>
+      <button type="button" class="btn btn-warning" onclick="audio_mute_toggle()">Alternar Mudo do Áudio</button>
+      <button type="button" class="btn btn-info" id="vcstatus" style="float:right;">Status da Chamada:</button>
     </div>
 
     <div style="padding-top: 30px;">
-      <div class="row" style="background-color: #f1f1f1;">
-        <div class="col-6" style="padding: 10px;">
+      <div class="container-video">
+        <div class="div-remoteVideo">
           <video id="remoteVideo" playsinline autoplay></video>
-
         </div>
-        <div class="col-6" style="padding: 10px;">
+        <div class="div-localVideo">
           <video id="localVideo" playsinline autoplay muted></video>
         </div>
       </div>
     </div>
 
-
-    <!-- Modal -->
     <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="answerModalLabel">Incoming Call</h5>
-            <button type="button" class="close" data-dismiss="modal" onclick="hangup();" aria-label="Close">
+            <h5 class="modal-title" id="answerModalLabel">Chamada Recebida</h5>
+            <button type="button" class="close" data-dismiss="modal" onclick="hangup();" aria-label="Fechar">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body" id="ansBody">
-            Incoming Call From
+            Chamada recebida de
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hangup();">Hang-up</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="answer();">Answer</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hangup();">Desligar</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="answer();">Atender</button>
           </div>
         </div>
       </div>
-
-
     </div>
-
+  </div>
 </body>
 
 </html>
