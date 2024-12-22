@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title>mesibo teste api</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Mesibo API -->
+    <script src="https://cdn.mesibo.com/api/mesibo.js"></script>
+
+    <!-- Custom JS -->
+    <script src="/static/js/main.js" defer></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- <div class="mt-3">
+        <h1 class="text-center">Chamada de Vídeo</h1>
+      </div> -->
+      <div class="container-div-buttons pt-3 pt-sm-0">
+        <div class="div-buttons-call">
+          <button
+            type="button"
+            class="btn btn-success btn-call-hangup"
+            id="btn-call"
+            onclick="video_call()"
+          >
+            Chamar
+            <i class="fa-solid fa-phone"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger btn-call-hangup"
+            onclick="hangup()"
+          >
+            Desligar
+            <i
+              class="fa-solid fa-phone-flip fa-rotate-by"
+              style="--fa-rotate-angle: 225deg"
+            ></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-info btn-video-mute visually-hidden"
+            onclick="video_mute_toggle()"
+          >
+            <i
+              class="fa-solid fa-video"
+              id="icon-video"
+              style="color: #ffffff"
+            ></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-info btn-audio-mute visually-hidden"
+            onclick="audio_mute_toggle()"
+          >
+            <i
+              class="fa-solid fa-microphone"
+              id="icon-microphone"
+              style="color: #ffffff"
+            ></i>
+          </button>
+        </div>
+
+        <div class="div-buttons-info">
+          <button type="button" class="btn btn-danger" id="cstatus">
+            Você está offline
+          </button>
+          <button
+            type="button"
+            class="btn btn-info visually-hidden"
+            id="vcstatus"
+            style="color: #ffffff"
+          >
+            Status da Chamada:
+          </button>
+        </div>
+      </div>
+
+      <div class="container-video">
+        <div class="div-remoteVideo">
+          <video id="remoteVideo" playsinline autoplay></video>
+        </div>
+        <div class="div-localVideo">
+          <video id="localVideo" playsinline autoplay muted></video>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="answerModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="answerModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="answerModalLabel">
+                Chamada Recebida
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
+            <div class="modal-body" id="ansBody">Chamada recebida de</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+                onclick="hangup();"
+              >
+                Desligar
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+                onclick="answer();"
+              >
+                Atender
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

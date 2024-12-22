@@ -1,0 +1,109 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.container-div-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.div-buttons-call {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-call-hangup {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.div-buttons-info {
+  display: flex;
+  gap: 1em;
+}
+
+.container-video {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
+  background-color: #000000;
+}
+
+.div-remoteVideo {
+  position: relative;
+  height: 700px;
+  border: 2px solid black;
+  width: 100%;
+  overflow: hidden;
+}
+
+.div-localVideo {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 200px;
+  height: 150px;
+  overflow: hidden;
+  border: 1px solid black;
+  z-index: 10;
+}
+
+#remoteVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#localVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    font-size: 0.8rem; 
+    padding: 0.25rem 0.5rem;
+  }
+
+  .div-localVideo {
+    width: 160px;
+    height: 140px;
+  }
+}
+
+
+@media (max-width: 576px) {
+  
+  .container-div-buttons {
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+    gap: 16px;
+  }
+  .container-video {
+    margin: 5px 0;
+  }
+  
+  .btn {
+    font-size: 0.7rem; 
+    padding: 0.2rem 0.4rem; 
+  }
+
+  .div-localVideo {
+    width: 140px;
+    height: 120px;
+  }
+}
+
