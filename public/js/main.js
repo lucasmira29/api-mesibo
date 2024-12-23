@@ -6,20 +6,18 @@ var api = new Mesibo();
 
 const params = new URLSearchParams(window.location.search);
 const accessToken = params.get('token');
-const recipient = params.get('to');
+const receiver = params.get('to');
 
 let userToken = '';
 let destination = '';
-let appId = 'com.exemploteste';
 
-if (accessToken && recipient) {
+if (accessToken && receiver) {
   userToken = accessToken;
-  destination = recipient;
+  destination = receiver;
 
-  api.setAppName(appId);
+  api.setAccessToken(userToken);
   var listener = new MesiboListener(api);
   api.setListener(listener);
-  api.setAccessToken(userToken);
   api.start();
 
   // Pedir permissão para vídeo e áudio
@@ -34,23 +32,49 @@ function MesiboListener(apiInstance) {
 
 // Gerencia o status da conexão
 MesiboListener.prototype.Mesibo_onConnectionStatus = function (status) {
-  console.log("Mesibo_onConnectionStatus: " + status);
-
   const connectionStatusButton = document.getElementById("cstatus");
-  if (!connectionStatusButton) {
-    return;
-  }
 
-  if (MESIBO_STATUS_ONLINE === status) {
-    connectionStatusButton.classList.replace("btn-danger", "btn-success");
-    connectionStatusButton.innerText = 'Você está online';
-    return;
-  }
+  switch (status) {
+    case MESIBO_STATUS_CONNECTING:
+      connectionStatusButton.classList.remove("btn-danger", "btn-success");
+      connectionStatusButton.classList.add("btn-warning");
+      connectionStatusButton.innerText = 'Conectando...';
+      break;
 
-  connectionStatusButton.classList.replace("btn-success", "btn-danger");
-  connectionStatusButton.innerText = status === MESIBO_STATUS_AUTHFAIL
-    ? "Desconectado: Token ou ID do aplicativo inválido"
-    : "Você está offline";
+    case MESIBO_STATUS_ONLINE:
+      connectionStatusButton.classList.remove("btn-danger", "btn-warning");
+      connectionStatusButton.classList.add("btn-success");
+      connectionStatusButton.innerText = 'Você está online';
+      break;
+
+    case MESIBO_STATUS_OFFLINE:
+    case MESIBO_STATUS_STOPPED:
+    case MESIBO_STATUS_CONNECTFAILURE:
+    case MESIBO_STATUS_NONETWORK:
+    case MESIBO_STATUS_ONPREMISEERROR:
+      connectionStatusButton.classList.remove("btn-success", "btn-warning");
+      connectionStatusButton.classList.add("btn-danger");
+      connectionStatusButton.innerText = "Você está offline";
+      break;
+
+    case MESIBO_STATUS_AUTHFAIL:
+      connectionStatusButton.classList.remove("btn-success", "btn-warning");
+      connectionStatusButton.classList.add("btn-danger");
+      connectionStatusButton.innerText = "Desconectado: Token ou ID do aplicativo inválido";
+      break;
+
+    case MESIBO_STATUS_SIGNOUT:
+      connectionStatusButton.classList.remove("btn-success", "btn-warning");
+      connectionStatusButton.classList.add("btn-danger");
+      connectionStatusButton.innerText = "Desconectado: Você saiu";
+      break;
+
+    default:
+      connectionStatusButton.classList.remove("btn-success", "btn-warning");
+      connectionStatusButton.classList.add("btn-danger");
+      connectionStatusButton.innerText = "Status desconhecido";
+      break;
+  }
 };
 
 // Gerencia chamadas recebidas
@@ -98,8 +122,7 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
     case MESIBO_CALLSTATUS_RINGING:
       statusMessage = "Chamando...";
       break;
-    // MESIBO__CALLSTATUS_INPROGRESS
-    case 48:
+    case 48:  // MESIBO__CALLSTATUS_INPROGRESS
       statusMessage = "Em andamento";
       callButtonElement.classList.add('visually-hidden');
       videoMuteButtonElement.classList.remove('visually-hidden');

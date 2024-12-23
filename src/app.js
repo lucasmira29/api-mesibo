@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.use('/static', express.static(path.join(path.resolve(), 'public')));
 
-app.use('/mesibo', routes);
+app.use(routes);
 
 
 app.get("/video-chamada", (req, res) => {

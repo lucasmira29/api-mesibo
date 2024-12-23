@@ -3,18 +3,21 @@ import { generateUserAcessToken } from "../services/mesiboServices.js";
 class MesiboController {
   static async createUserToken(req, res) {
     try {
-      const { address, appId } = req.body;
+      const { address, receiver } = req.body;
 
-      if (!address || !appId) {
-        return res.status(400).json({ message: 'O endereço e o ID do aplicativo são obrigatórios.' });
+      if (!address || !receiver) {
+        return res.status(400).json({ message: 'O endereço e destinatário são obrigatórios.' });
       }
 
-      const response = await generateUserAcessToken(address, appId);
+      const response = await generateUserAcessToken(address);
 
       if (response && response.result) {
+        const route = `/video-chamada?token=${response.user.token}&to=${receiver}`;
+
         return res.status(200).json({
-          message: 'Token de acesso do usuário gerado com sucesso.',
-          token: response.user.token
+          message: 'Token de acesso e link gerado com sucesso.',
+          token: response.user.token,
+          url: route // URL relativa com token e destinatário
         });
       } else {
         return res.status(400).json({ message: 'Erro ao gerar o token de acesso do usuário', erro: response });

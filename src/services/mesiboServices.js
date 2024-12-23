@@ -2,7 +2,7 @@ import axios from 'axios';
 import { mesiboConfig } from '../config/mesiboConfig.js';
 
 
-export const generateUserAcessToken = async (userAddress, appId, expiry = 525600) => {
+export const generateUserAcessToken = async (userAddress, expiry = 525600) => {
   const body = {
     op: "useradd",
     token: mesiboConfig.token,
@@ -10,7 +10,7 @@ export const generateUserAcessToken = async (userAddress, appId, expiry = 525600
       address: userAddress,
 
       token: {
-        appid: appId,
+        v2: true,
         expiry: expiry
       }
     }
