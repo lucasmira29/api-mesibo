@@ -62,7 +62,7 @@ api-mesibo/
    Crie um arquivo `.env` na raiz do projeto e adicione:
 
    ```env
-   MESIBO_ACCESS_KEY=<seu_access_key>
+   MESIBO_TOKEN=<seu_access_key>
    ```
 
 ---
