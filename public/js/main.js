@@ -138,7 +138,7 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
       statusMessage = "Destino inválido";
       break;
     case MESIBO_CALLSTATUS_UNREACHABLE:
-      statusMessage = "Inalcançável";
+      statusMessage = "Indisponível";
       break;
     case MESIBO_CALLSTATUS_OFFLINE:
       statusMessage = "Offline";
@@ -164,6 +164,10 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
 
 // Função para iniciar uma chamada de vídeo
 function video_call() {
+  const callStatusElement = document.getElementById("vcstatus");
+  callStatusElement.classList.remove('visually-hidden');
+  callStatusElement.innerText = "Chamando...";
+
   api.setupVideoCall("localVideo", "remoteVideo", true);
   api.call(destination);
 }
