@@ -3,6 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: url('../img/fundo.jpg');
 }
 
 
@@ -42,7 +43,7 @@ body {
 .div-remoteVideo {
   position: relative;
   height: 700px;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   width: 100%;
   overflow: hidden;
 }
