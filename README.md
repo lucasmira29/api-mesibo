@@ -9,6 +9,8 @@ Este projeto implementa uma API em Node.js para integrar a funcionalidade de cha
 ```plaintext
 api-mesibo/
 ┣ 📂public
+┃ ┣ 📂img
+┃ ┣ ┗ fundo.jpg
 ┃ ┣ 📂css
 ┃ ┃ ┗ style.css
 ┃ ┣ 📂js
