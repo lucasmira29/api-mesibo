@@ -122,7 +122,9 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
     case MESIBO_CALLSTATUS_RINGING:
       statusMessage = "Chamando...";
       break;
-    case 48:  // MESIBO__CALLSTATUS_INPROGRESS
+    case 48: // MESIBO_CALLSTATUS_INPROGRESS
+    case 10: // MESIBO_CALLSTATUS_UNMUTED
+    case 9: // MESIBO_CALLSTATUS_MUTED
       statusMessage = "Em andamento";
       callButtonElement.classList.add('visually-hidden');
       videoMuteButtonElement.classList.remove('visually-hidden');
