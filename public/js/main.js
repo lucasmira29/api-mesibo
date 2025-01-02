@@ -100,6 +100,8 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
 
   const callStatusElement = document.getElementById("vcstatus");
   const callButtonElement = document.getElementById('btn-call');
+  const videoIcon = document.getElementById('icon-video');
+  const micIcon = document.getElementById('icon-microphone');
   const videoMuteButtonElement = document.querySelector('.btn-video-mute');
   const audioMuteButtonElement = document.querySelector('.btn-audio-mute');
 
@@ -112,6 +114,10 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
     callButtonElement.classList.remove('visually-hidden');
     videoMuteButtonElement.classList.add('visually-hidden');
     audioMuteButtonElement.classList.add('visually-hidden');
+    videoIcon.classList.remove('fa-video-slash');
+    videoIcon.classList.add('fa-video');
+    micIcon.classList.remove('fa-microphone-slash');
+    micIcon.classList.add('fa-microphone');
 
     const answerModal = new bootstrap.Modal(document.getElementById('answerModal'));
     answerModal.hide();
