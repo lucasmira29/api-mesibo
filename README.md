@@ -2,8 +2,6 @@
   
   <h1 align="center">API Mesibo Integration </h1>    
 
-  [<img src="https://mesibo.com/assets/images/favicon/favicon-32x32.png"/>](https://mesibo.com)  
-
   <p align="center">
     <strong>Integração de chamadas de vídeo 1-1 com a plataforma Mesibo usando Node.js.</strong>
   </p>
