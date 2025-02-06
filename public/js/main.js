@@ -5,6 +5,7 @@
 var api = new Mesibo();
 
 const params = new URLSearchParams(window.location.search);
+const videoCallExplanationModal = new bootstrap.Modal(document.getElementById('infoModal'));
 const accessToken = params.get('token');
 const receiver = params.get('to');
 
@@ -20,7 +21,7 @@ if (accessToken && receiver) {
   api.setListener(listener);
   api.start();
 
-  // Pedir permissão para vídeo e áudio
+  videoCallExplanationModal.show();
   navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 }
 
@@ -121,6 +122,7 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
 
     const answerModal = new bootstrap.Modal(document.getElementById('answerModal'));
     answerModal.hide();
+    window.location.href = '/sessao-encerrada';
   }
 
   // Atualiza o status da chamada com base no código recebido
@@ -146,7 +148,7 @@ MesiboListener.prototype.Mesibo_onCallStatus = function (callId, status, video) 
       statusMessage = "Destino inválido";
       break;
     case MESIBO_CALLSTATUS_UNREACHABLE:
-      statusMessage = "Indisponível";
+      statusMessage = "Chamada Perdida";
       break;
     case MESIBO_CALLSTATUS_OFFLINE:
       statusMessage = "Offline";

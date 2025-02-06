@@ -24,4 +24,9 @@ app.get("/video-chamada", (req, res) => {
   res.sendFile(path.join(path.resolve(), 'public', 'index.html'));
 });
 
+app.get("/sessao-encerrada", (req, res) => {
+  res.sendFile(path.join(path.resolve(), 'public', 'session-closed.html'));
+});
+
+
 export default app;

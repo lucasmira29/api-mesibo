@@ -3,7 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: url('../img/fundo.jpg');
+  background-color: #333333;
 }
 
 
@@ -43,7 +43,6 @@ body {
 .div-remoteVideo {
   position: relative;
   height: 700px;
-  /* border: 2px solid black; */
   width: 100%;
   overflow: hidden;
 }
@@ -73,6 +72,65 @@ body {
   object-fit: cover;
 }
 
+.video-message-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.video-security-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-family: Arial, sans-serif;
+}
+
+
+.custom-modal .modal-content {
+  background-color: #2e2e2e; 
+  color: #f1f1f1;             
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.custom-modal .modal-header {
+  background-color: #444;     
+  color: #f1f1f1;             
+  border-bottom: 1px solid #555; 
+  border-radius: 8px 8px 0 0;  
+}
+
+
+.custom-modal .modal-body {
+  background-color: #303030;  
+  color: #ddd;                
+  padding: 20px;              
+}
+
+
+.custom-modal .modal-footer {
+  background-color: #444;    
+  color: #f1f1f1;             
+  border-top: 1px solid #555; 
+  border-radius: 0 0 8px 8px; 
+}
+
+
+.custom-modal .modal-header .btn-close {
+  color: #f1f1f1;             
+  font-size: 1.5rem;
+}
+
+
 @media (max-width: 768px) {
   .btn {
     font-size: 0.8rem; 
@@ -88,6 +146,10 @@ body {
 
 @media (max-width: 576px) {
   
+  body {
+    flex-direction: column-reverse;
+  }
+
   .container-div-buttons {
     justify-content: center;
     flex-wrap: wrap-reverse;
@@ -105,6 +167,12 @@ body {
   .div-localVideo {
     width: 140px;
     height: 120px;
+  }
+
+  .video-security-message {
+    width: 270px;
+    padding: 5px 0;
+    font-size: 0.7rem;
   }
 }
 

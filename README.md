@@ -1,55 +1,32 @@
-# API Mesibo Integration
+<div align="center">
+  
+  <h1 align="center">API Mesibo Integration </h1>    
 
-Este projeto implementa uma API em Node.js para integrar a funcionalidade de chamadas de vídeo 1-1 utilizando a plataforma **Mesibo**. Ele também retorna uma página HTML contendo o frontend responsável por gerenciar a chamada de vídeo.
+  [<img src="https://mesibo.com/assets/images/favicon/favicon-32x32.png"/>](https://mesibo.com)  
 
----
+  <p align="center">
+    <strong>Integração de chamadas de vídeo 1-1 com a plataforma Mesibo usando Node.js.</strong>
+  </p>
 
-## Estrutura do Projeto
+  [![pt-BR](https://img.shields.io/badge/lang-pt--BR-green.svg)](./README.md)   [![en](https://img.shields.io/badge/lang-en-red.svg)](./README-en.md)
 
-```plaintext
-api-mesibo/
-┣ 📂public
-┃ ┣ 📂img
-┃ ┣ ┗ fundo.jpg
-┃ ┣ 📂css
-┃ ┃ ┗ style.css
-┃ ┣ 📂js
-┃ ┃ ┗ main.js
-┃ ┗ index.html
-┣ 📂src
-┃ ┣ 📂config
-┃ ┃ ┗ mesiboConfig.js
-┃ ┣ 📂controllers
-┃ ┃ ┗ mesiboController.js
-┃ ┣ 📂routes
-┃ ┃ ┗ mesiboRoutes.js
-┃ ┣ 📂services
-┃ ┃ ┗ mesiboServices.js
-┃ ┗ app.js
-┣ .env
-┣ .gitignore
-┣ eslint.config.js
-┣ package-lock.json
-┣ package.json
-┣ README.md
-┗ server.js
-```
+</div>
 
 ---
 
-## Requisitos
+## Requisitos ⚙️
 
 - Node.js v16+
 - NPM ou Yarn
 
 ---
 
-## Instalação
+## Instalação 🔧
 
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/lucasmira29/api-mesibo.git
+   git clone
    cd api-mesibo
    ```
 
@@ -69,12 +46,12 @@ api-mesibo/
 
 ---
 
-## Uso
+## Uso 🚀
 
 1. Inicie o servidor:
 
    ```bash
-   npm start
+   node server.js
    ```
 
 2. Acesse a aplicação no navegador:
@@ -143,7 +120,27 @@ Gera um token de acesso para o usuário e retorna o link para iniciar a chamada.
 
 ---
 
-## Tecnologias Utilizadas
+## Fluxo de Integração 🔄
+
+A API pode ser integrada a qualquer plataforma que necessite de chamadas de vídeo 1-1, seguindo o seguinte fluxo:
+
+1. **Geração de Token e Link**:
+   - Quando um usuário deseja iniciar uma sessão de vídeo, o sistema faz uma requisição `POST` para o endpoint `/generate-token`, passando os identificadores do chamador e do destinatário.
+   - A API retorna um token de acesso exclusivo e um link para a chamada de vídeo.
+
+2. **Link da Chamada**:
+   - O link gerado contém os parâmetros `token` e `to`, que são utilizados para redirecionar os usuários para a interface da chamada de vídeo.
+   - Exemplo de link gerado:
+     ```
+     http://localhost:3000/video-chamada?token=<user_access_token>&to=<receiver_address>
+     ```
+
+3. **Interface de Vídeo**:
+   - A API fornece uma página HTML que carrega a interface da Mesibo para iniciar a chamada de vídeo.
+
+---
+
+## Tecnologias Utilizadas 💻
 
 - **Node.js**: Ambiente de execução para o back-end.
 - **Express**: Framework para a criação das rotas.
@@ -152,3 +149,7 @@ Gera um token de acesso para o usuário e retorna o link para iniciar a chamada.
 - **HTML/CSS/JavaScript**: Construção da interface do usuário.
 
 ---
+
+## Licença 📜
+
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.

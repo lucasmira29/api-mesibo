@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <title>mesibo teste api</title>
+    <title>Chamada de Vídeo</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -113,7 +113,7 @@
         aria-labelledby="answerModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog custom-modal" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="answerModalLabel">
@@ -147,6 +147,55 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- modal explicativo -->
+    <div
+      class="modal fade"
+      id="infoModal"
+      tabindex="-1"
+      aria-labelledby="infoModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog custom-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="infoModalLabel">Como funciona?</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>1. Clique no botão "Chamar" para iniciar a chamada.</p>
+            <p>
+              2. Certifique-se de que sua câmera e microfone estão ativados.
+            </p>
+            <p>
+              3. Use os botões de controle para silenciar o vídeo ou o áudio.
+            </p>
+            <p>4. Para encerrar a chamada, clique no botão "Desligar".</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Entendi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-message-container">
+      <div class="video-security-message">
+        <small>Chamada segura e criptografada de ponta a ponta</small>
+        <i class="fa-solid fa-lock"></i>
       </div>
     </div>
     <script
